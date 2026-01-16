@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Together Since 2023 💙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #E8F4F8;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Decorative background circles */
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 400px;
+            height: 400px;
+            background: #FFB6C1;
+            top: -100px;
+            right: -100px;
+            opacity: 0.3;
+            filter: blur(80px);
+        }
+
+        body::after {
+            width: 350px;
+            height: 350px;
+            background: #87CEEB;
+            bottom: -80px;
+            left: -80px;
+            opacity: 0.3;
+            filter: blur(80px);
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06),
+                        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #5A6C7D;
+            font-weight: 500;
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .counter-item {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 24px 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease;
+        }
+
+        .counter-item:active {
+            transform: scale(0.98);
+        }
+
+        .counter-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2C3E50;
+            line-height: 1;
+            margin-bottom: 8px;
+            font-variant-numeric: tabular-nums;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .counter-value.update {
+            animation: pulse 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .counter-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7A8B9C;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Color accents for each counter */
+        .counter-item:nth-child(1) .counter-value { color: #FF6B9D; }
+        .counter-item:nth-child(2) .counter-value { color: #4A90E2; }
+        .counter-item:nth-child(3) .counter-value { color: #50C878; }
+        .counter-item:nth-child(4) .counter-value { color: #9B59B6; }
+
+        .start-date {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .date-label {
+            font-size: 13px;
+            color: #7A8B9C;
+            font-weight: 600;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .date-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+
+        @media (max-width: 380px) {
+            .glass-card {
+                padding: 32px 24px;
+            }
+
+            .title {
+                font-size: 23px;
+            }
+
+            .counter-value {
+                font-size: 42px;
+            }
+
+            .counter-grid {
+                gap: 12px;
+            }
+
+            .counter-item {
+                padding: 20px 12px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .counter-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <div class="header">
+                <h1 class="title">معاً منذ</h1>
+                <p class="subtitle">Together Since</p>
+            </div>
+
+            <div class="counter-grid">
+                <div class="counter-item">
+                    <div class="counter-value" id="days">0</div>
+                    <div class="counter-label">أيام</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="hours">0</div>
+                    <div class="counter-label">ساعات</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="minutes">0</div>
+                    <div class="counter-label">دقائق</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-value" id="seconds">0</div>
+                    <div class="counter-label">ثواني</div>
+                </div>
+            </div>
+
+            <div class="start-date">
+                <div class="date-label">Start Date</div>
+                <div class="date-value">November 22, 2023 • 7:42 PM</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const startDate = new Date('2023-11-22T19:42:00');
+        
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        let prevValues = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            updateElement(daysEl, days, prevValues.days);
+            updateElement(hoursEl, hours, prevValues.hours);
+            updateElement(minutesEl, minutes, prevValues.minutes);
+            updateElement(secondsEl, seconds, prevValues.seconds);
+
+            prevValues = { days, hours, minutes, seconds };
+        }
+
+        function updateElement(el, newVal, oldVal) {
+            if (newVal !== oldVal) {
+                el.classList.add('update');
+                setTimeout(() => el.classList.remove('update'), 300);
+            }
+            el.textContent = newVal;
+        }
+
+        updateCounter();
+        setInterval(updateCounter, 1000);
+    </script>
+</body>
+</html>
